@@ -15,6 +15,7 @@ applications:
     JBP_CONFIG_COMPONENTS: "jres: ['com.sap.xs.java.buildpack.jdk.SAPMachineJDK']"
   services:
    - az-destinations
+   - az-private-link
 #  - my-application-logs
 #  - my-xsuaa
 #  - my-destination
