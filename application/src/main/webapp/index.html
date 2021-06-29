@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Welcome to Your Application!</title>
+    <title>Welcome to Your private link service Application!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,13 +26,11 @@
 <body>
 <h1>Welcome to Your application accessing S4 within your private Azure VNet!</h1>
 
-<a href="https://sap.github.io/cloud-sdk/docs/java/getting-started" class="svg">
-    <object data="https://help.sap.com/http.svc/rc/6c02295dfa8f47cf9c08a19f2e172901/1.0/en-US/logo.svg" type="image/svg+xml"></object>
-</a>
+<img src="priv-lnk-overview.png" alt="Overview of architecture" style="width:800px;height:auto;">
 
 <p>
     This is your <strong>SAP Cloud Platform Cloud Foundry TomEE</strong> application
-    powered by the <strong>SAP Cloud SDK</strong>.
+    powered by the <strong>SAP Cloud SDK</strong> to access Azure via the <strong>private link service</strong>.
 </p>
 <p>
     Find the project docs on our <a href="https://github.com/MartinPankraz/az-private-linky">GitHub repos</a>.
@@ -43,7 +41,12 @@
         <code>mvn package tomee:run</code>. Afterwards open localhost:8080 (in SAP BAS only from the shell. Locally you can navigate in your browser)
     </li>
     <li>
-        Visit the <a href="azure/sap/opu/odata/sap/epm_ref_apps_prod_man_srv/Products?$top=1">BTPAzureProxyServlet</a>.
+        Visit <a href="azure/sap/opu/odata/sap/epm_ref_apps_prod_man_srv/Products?$top=1">BTPAzureProxyServlet</a> for Cloud SDK.
+    </li>
+    <li>
+        Visit <a href="ignoressl/sap/opu/odata/sap/epm_ref_apps_prod_man_srv/Products?$top=1">BTPAzureProxyServletIgnoreSSL</a> for plain Apache Http with SSL ignore.
+    </li>
+    <li>
         You can find its source code in <code>application/src/main/java/</code>.
     </li>
     <li>
