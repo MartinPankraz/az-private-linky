@@ -9,3 +9,24 @@ This app was built from SAP's Cloud SDK [getting-started Java project](https://d
 Meaning you get now a managed component to expose your SAP backend to BTP on Azure without the need for a Cloud Connector.
 
 ![Architecture overview](/application/src/main/webapp/priv-lnk-overview.png)
+
+## Destination config
+key | value |
+--- | --- |
+Name | s4test |
+URL | https://[your private IP]/ |
+Proxy Type | Internet |
+Authentication | whatever you have here. We tested Basic Auth initially |
+
+### Additional Properties
+key | value |
+--- | --- |
+sap-client | your client no |
+TrustAll | true |
+HTML5.DynamicDestination | true |
+WebIDEEnabled | true |
+WebIDEUsage | odata_abap |
+
+TrustAll needed with https and if no code based approach to override verifier.
+
+Reach out via the [GitHub Issues page](https://github.com/MartinPankraz/az-private-linky/issues) of this reposto talk about it some more :-)
