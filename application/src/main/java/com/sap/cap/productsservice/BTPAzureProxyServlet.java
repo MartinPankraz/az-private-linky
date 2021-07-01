@@ -32,7 +32,7 @@ public class BTPAzureProxyServlet extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(BTPAzureProxyServlet.class);
-    private static final String DESTINATION_NAME = "s4testshort";
+    private static final String DESTINATION_NAME = "s4test";
 
     @Override
     protected void doGet( final HttpServletRequest request, final HttpServletResponse response )
