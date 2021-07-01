@@ -3,6 +3,8 @@ Java Project to get you started with [SAP BTP Private Link Service for Azure](ht
 
 This app was built from SAP's Cloud SDK [getting-started Java project](https://developers.sap.com/tutorials/s4sdk-cloud-foundry-sample-application.html#e733958f-50fc-45e3-8f30-d7a53f2c9ad0).
 
+We used the `/sap/opu/odata/sap/epm_ref_apps_prod_man_srv` OData service for this project.
+
 ## Project context
 [Azure Private Link Service](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview) allows private connectivity between resources running on Azure in different environments. That includes SAP's Business Technology Platform when provisioned on Azure. SAP made that functionality available via a CloudFoundry Service.
 
