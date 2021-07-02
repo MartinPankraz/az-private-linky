@@ -8,6 +8,7 @@ Find my blog post series on the topic [here]().
 Additional Resources |
 --- |
 [Alternative CAP Project](https://github.com/MartinPankraz/az-private-linky-cap) |
+[Fiori Project using CAP or Java backend](https://github.com/MartinPankraz/az-products-ui) |
 [SAP's tutorial with CF CLI commands](https://developers.sap.com/tutorials/private-link-microsoft-azure.html) |
 [SAP's official blog](https://blogs.sap.com/2021/06/28/sap-private-link-service-beta-is-available/) |
 
