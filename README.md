@@ -3,7 +3,7 @@ Java Project to get you started with [SAP BTP Private Link Service for Azure](ht
 
 This app was built from SAP's Cloud SDK [getting-started Java project](https://developers.sap.com/tutorials/s4sdk-cloud-foundry-sample-application.html#e733958f-50fc-45e3-8f30-d7a53f2c9ad0).
 
-Find my blog post series on the topic [here]().
+Find my blog post series on the topic [here](https://blogs.sap.com/2021/07/02/whatever-happens-in-an-azure-and-btp-private-linky-swear-stays-in-the-linky-swear/).
 
 Additional Resources |
 --- |
