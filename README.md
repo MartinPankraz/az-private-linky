@@ -12,6 +12,7 @@ Additional Resources |
 [iFlow example using CAP or Java backend](https://github.com/MartinPankraz/az-private-linky-integration-suite) |
 [SAP's tutorial with CF CLI commands](https://developers.sap.com/tutorials/private-link-microsoft-azure.html) |
 [SAP's official blog](https://blogs.sap.com/2021/06/28/sap-private-link-service-beta-is-available/) |
+[SAP's Discovery Center Mission](https://github.com/SAP-samples/s4hana-btp-extension-devops/tree/mission/05-PrivateLink) |
 
 We used the `/sap/opu/odata/sap/epm_ref_apps_prod_man_srv` OData service for this project.
 
