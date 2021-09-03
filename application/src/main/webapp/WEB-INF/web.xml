@@ -8,7 +8,6 @@
         <session-timeout>20</session-timeout>
     </session-config>
 
-    <!--
     <login-config>
         <auth-method>XSUAA</auth-method>
     </login-config>
@@ -26,7 +25,7 @@
     <security-role>
         <role-name>Display</role-name>
     </security-role>
-    -->
+    
 
     <!--<filter>
         <filter-name>RestCsrfPreventionFilter</filter-name>

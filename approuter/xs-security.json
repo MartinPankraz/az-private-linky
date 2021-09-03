@@ -1,0 +1,23 @@
+{
+  "xsappname": "firstapp-azure-private",
+  "tenant-mode": "shared",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Display",
+      "description": "display"
+    },
+    {
+        "name" : "uaa.user",
+        "description" : "uaa.user"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "description": "Required to view things in our solution",
+      "scope-references"     : [
+        "$XSAPPNAME.Display", "uaa.user"
+      ]
+    }
+  ]
+}

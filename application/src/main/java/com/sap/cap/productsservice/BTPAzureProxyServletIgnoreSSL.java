@@ -5,7 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManagerFactory;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,22 +23,39 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Base64;
 
 @WebServlet("/ignoressl/*")
+@ServletSecurity(@HttpConstraint(rolesAllowed = { "Display" }))
 public class BTPAzureProxyServletIgnoreSSL extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(BTPAzureProxyServletIgnoreSSL.class);
-    private static final String DESTINATION_NAME = "s4testshort";
+    private static final String DESTINATION_NAME = "s4test";
 
     @Override
     protected void doGet( final HttpServletRequest request, final HttpServletResponse response )
         throws IOException
     {   
         HttpDestination httpDestination = DestinationAccessor.getDestination(DESTINATION_NAME).asHttp();
+        KeyStore keyStore = httpDestination.getTrustStore().getOrNull();
+        SSLContext sslContext = null;
+        TrustManagerFactory trustManagerFactory;
+        try {
+            trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+            trustManagerFactory.init(keyStore);
+            sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, trustManagerFactory.getTrustManagers(), null);
+            //Certificate certificate = keyStore.getCertificate("fake.cer");
+        } catch (NoSuchAlgorithmException | KeyStoreException | KeyManagementException e) {
+            e.printStackTrace();
+        }
         // Create trusting host name verifier for private link IP
         String privateIP = httpDestination.getUri().getHost();
         HostnameVerifier allHostsValid = new HostnameVerifier() {
@@ -67,6 +88,7 @@ public class BTPAzureProxyServletIgnoreSSL extends HttpServlet
         Instant start = Instant.now();
         
         HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
+        con.setSSLSocketFactory(sslContext.getSocketFactory());
         con.setRequestMethod("GET");
         con.setRequestProperty("Authorization", basic);
         

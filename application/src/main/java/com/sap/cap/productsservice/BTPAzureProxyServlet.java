@@ -14,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +30,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 @WebServlet("/azure/*")
+@ServletSecurity(@HttpConstraint(rolesAllowed = { "Display" }))
 public class BTPAzureProxyServlet extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
@@ -51,6 +54,7 @@ public class BTPAzureProxyServlet extends HttpServlet
         logger.info("Destination target (" + httpMethod + "): " + url);
         DefaultHttpClientFactory customFactory = new DefaultHttpClientFactory();
         final HttpDestination destination = DestinationAccessor.getDestination(DESTINATION_NAME).asHttp();
+        logger.info("Destination for OAUTH loaded:"+destination.getAuthenticationType().toString());
         HttpClient httpClient = customFactory.createHttpClient(destination);
         
         HttpUriRequest myRequest = new HttpGet(url);
@@ -68,9 +72,9 @@ public class BTPAzureProxyServlet extends HttpServlet
     
         //post back response
         response.setCharacterEncoding("UTF-8");
-        String contentType = productResponse.getFirstHeader("Content-Type").getValue();
-        response.setContentType(contentType);
+        response.setContentType(productResponse.getFirstHeader("Content-Type").getValue());
         response.setStatus(productResponse.getStatusLine().getStatusCode());
+        //decoratServletResponseWithSAPHeader(response, productResponse);        
         if (entity != null) {
             final String content = EntityUtils.toString(entity);
             response.getWriter().write(content.toString());
@@ -112,11 +116,11 @@ public class BTPAzureProxyServlet extends HttpServlet
         //logger.info("Message round trip time: " + timeElapsed + "ms");
 
         final HttpEntity entity = productResponse.getEntity();
-        String contentType = productResponse.getFirstHeader("Content-Type").getValue();
-        response.setContentType(contentType);
+        response.setContentType(productResponse.getFirstHeader("Content-Type").getValue());
         //post back response
         response.setCharacterEncoding("UTF-8");
         response.setStatus(productResponse.getStatusLine().getStatusCode());
+        //decoratServletResponseWithSAPHeader(response, productResponse);
         if (entity != null) {
             final String content = EntityUtils.toString(entity);
             response.getWriter().write(content.toString());
@@ -153,8 +157,7 @@ public class BTPAzureProxyServlet extends HttpServlet
     
         //post back response
         response.setCharacterEncoding("UTF-8");
-        String contentType = productResponse.getFirstHeader("Content-Type").getValue();
-        response.setContentType(contentType);
+        response.setContentType(productResponse.getFirstHeader("Content-Type").getValue());
         response.setStatus(productResponse.getStatusLine().getStatusCode());
         if (entity != null) {
             final String content = EntityUtils.toString(entity);
@@ -163,4 +166,17 @@ public class BTPAzureProxyServlet extends HttpServlet
             response.getWriter().write("No data available.");
         }
     }
+
+    /*private void decoratServletResponseWithSAPHeader(HttpServletResponse toBeDecorated, HttpResponse sourceResponse){
+        Header[] headerNames = sourceResponse.getAllHeaders();
+        for (Header header : headerNames) {
+            if(header.getName().toLowerCase().contains("sap")){
+                toBeDecorated.setHeader(header.getName(), header.getValue());
+            }else if(header.getName().toLowerCase().contains("cookie")){
+                toBeDecorated.setHeader(header.getName(), header.getValue());
+            }else if(header.getName().toLowerCase().contains("dataserviceversion")){
+                toBeDecorated.setHeader(header.getName(), header.getValue());
+            }
+        }        
+    }*/
 }
