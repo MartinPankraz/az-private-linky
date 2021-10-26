@@ -32,12 +32,13 @@ import java.time.Instant;
 import java.util.Base64;
 
 @WebServlet("/ignoressl/*")
-@ServletSecurity(@HttpConstraint(rolesAllowed = { "Display" }))
+/* uncomment once you start using the approuter */
+//@ServletSecurity(@HttpConstraint(rolesAllowed = { "Display" }))
 public class BTPAzureProxyServletIgnoreSSL extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(BTPAzureProxyServletIgnoreSSL.class);
-    private static final String DESTINATION_NAME = "s4test";
+    private static final String DESTINATION_NAME = "s4BasicAuth";
 
     @Override
     protected void doGet( final HttpServletRequest request, final HttpServletResponse response )
@@ -71,7 +72,7 @@ public class BTPAzureProxyServletIgnoreSSL extends HttpServlet
         HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
 
         String uriBase = httpDestination.getUri().toString();
-        String uriReplaced = request.getRequestURI().trim().split("/ignoressl/")[1];
+        String uriReplaced = "/" + request.getRequestURI().trim().split("/ignoressl/")[1];
         String queryString = request.getQueryString();
 
         logger.info("Destination target: " + uriBase + uriReplaced + "?" + queryString);

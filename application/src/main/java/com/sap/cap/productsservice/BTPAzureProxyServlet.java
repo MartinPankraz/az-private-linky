@@ -30,12 +30,13 @@ import java.time.Duration;
 import java.time.Instant;
 
 @WebServlet("/azure/*")
-@ServletSecurity(@HttpConstraint(rolesAllowed = { "Display" }))
+/* uncomment once you start using the approuter */
+//@ServletSecurity(@HttpConstraint(rolesAllowed = { "Display" }))
 public class BTPAzureProxyServlet extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(BTPAzureProxyServlet.class);
-    private static final String DESTINATION_NAME = "s4test";
+    private static final String DESTINATION_NAME = "s4BasicAuth";
 
     @Override
     protected void doGet( final HttpServletRequest request, final HttpServletResponse response )

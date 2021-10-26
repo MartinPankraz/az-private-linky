@@ -8,7 +8,7 @@
         <session-timeout>20</session-timeout>
     </session-config>
 
-    <login-config>
+    <!--<login-config>
         <auth-method>XSUAA</auth-method>
     </login-config>
 
@@ -24,7 +24,7 @@
 
     <security-role>
         <role-name>Display</role-name>
-    </security-role>
+    </security-role>-->
     
 
     <!--<filter>
