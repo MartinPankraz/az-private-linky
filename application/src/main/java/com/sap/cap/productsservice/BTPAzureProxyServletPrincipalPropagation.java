@@ -138,6 +138,7 @@ public class BTPAzureProxyServletPrincipalPropagation extends HttpServlet
         int status = 0;
         StringBuffer content = new StringBuffer();
         try {
+            //Check Destination Service API for reference: https://api.sap.com/api/SAP_CP_CF_Connectivity_Destination/resource
             url = new URL("https://destination-configuration.cfapps.eu20.hana.ondemand.com/destination-configuration/v1/destinations/"+DESTINATION_NAME);
             HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
             con.setRequestMethod("GET");

@@ -105,4 +105,8 @@ If you configure SAP Principal Propagation based upon above config, please note 
 
 I can warmly recommend transaction __sec_diag_tool__ to troubleshoot any Principal Propagation related issues.
 
+### Testing the flow
+To get started I recommend to test your authentication flow without BTP private link to rule out any hickups. I provided a [Postman collection](/Templates/BTP_Private_Link_Service_Testing.postman_collection.json) for that. It is meant to be executed from top to bottom.
+
+
 Reach out via the [GitHub Issues page](https://github.com/MartinPankraz/az-private-linky/issues) of this reposto talk about it some more :-)
