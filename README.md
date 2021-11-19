@@ -113,7 +113,7 @@ I can warmly recommend transaction __sec_diag_tool__ to troubleshoot any Princip
 #### Testing the SAMLAssertion flow
 To get started I recommend to test your authentication flow without BTP private link to rule out any hickups. I provided a [Postman collection](/Templates/BTP_Private_Link_Service_Testing.postman_collection.json) for that. It is meant to be executed from top to bottom.
 
-### 4. RFC Destination congiguration
+### 4. RFC Destination configuration
 key | value |
 --- | --- |
 Name | s4BasicAuth |
@@ -127,7 +127,7 @@ key | value |
 --- | --- |
 jco.client.client | your SAP client no |
 jco.client.lang | potentially define the language for the output or pass down from your CF app |
-jco.client.wshost | btp_private_link_hostname that points to your SAP WDisp (till available 10.220.0.7.nip.io) |
+jco.client.wshost | btp_private_link_hostname that points to your SAP WDisp (till available your-pls-private-ip.nip.io) |
 jco.client.wsport | your SAP WDisp port |
 jco.destination.pool_capacity | default 1 |
 
