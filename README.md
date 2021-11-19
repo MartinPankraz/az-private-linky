@@ -110,6 +110,9 @@ If you configure SAP Principal Propagation based upon above config, please note 
 
 I can warmly recommend transaction __sec_diag_tool__ to troubleshoot any Principal Propagation related issues.
 
+#### Testing the SAMLAssertion flow
+To get started I recommend to test your authentication flow without BTP private link to rule out any hickups. I provided a [Postman collection](/Templates/BTP_Private_Link_Service_Testing.postman_collection.json) for that. It is meant to be executed from top to bottom.
+
 ### 4. RFC Destination congiguration
 key | value |
 --- | --- |
@@ -128,7 +131,7 @@ jco.client.wshost | btp_private_link_hostname that points to your SAP WDisp (til
 jco.client.wsport | your SAP WDisp port |
 jco.destination.pool_capacity | default 1 |
 
-Note for initial testing property __jco.client.tls_trust_all__ is available too. Find more details on JCo properties [here](https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/ab6eac92978f469e9eabe3d477ca2411.html) and from the NEO docs [here](https://help.sap.com/viewer/b865ed651e414196b39f8922db2122c7/Cloud/en-US/8278bed44893498f95d5d6d5f0a47f35.html).
+Note for initial testing of the RFC connection with JCo the property __jco.client.tls_trust_all__ might be helpful. Find more details on JCo properties [here](https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/ab6eac92978f469e9eabe3d477ca2411.html) and from the NEO docs [here](https://help.sap.com/viewer/b865ed651e414196b39f8922db2122c7/Cloud/en-US/8278bed44893498f95d5d6d5f0a47f35.html).
 
 ## Get into contact
 Reach out via the [GitHub Issues page](https://github.com/MartinPankraz/az-private-linky/issues) of this reposto talk about it some more :-)

@@ -1,0 +1,331 @@
+{
+	"info": {
+		"_postman_id": "df80327f-5c5a-48ee-a08a-070bb4d8af02",
+		"name": "BTP_Private_Link_Service_Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Bearer for Destination Service with User (mimic cf app router)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var json = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"XSUAABearerToken\", json.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{DestinationClientSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{DestinationClientId}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "response_type",
+							"value": "token",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{cf-user-name}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{cf-user-pwd}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://{{subaccount-domain}}.authentication.eu20.hana.ondemand.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"{{subaccount-domain}}",
+						"authentication",
+						"eu20",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get SAML Destination config",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var json = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"SAMLToken\", json.authTokens[0].value);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{XSUAABearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-user-token",
+						"value": "{{XSUAABearerToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://destination-configuration.cfapps.eu20.hana.ondemand.com/destination-configuration/v1/destinations/s4oauth",
+					"protocol": "https",
+					"host": [
+						"destination-configuration",
+						"cfapps",
+						"eu20",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"destination-configuration",
+						"v1",
+						"destinations",
+						"s4oauth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Bearer for SAML",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var json = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"BearerToken\", json.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{OAuth-User-Pwd}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{OAuth-User-Id}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "urn:ietf:params:oauth:grant-type:saml2-bearer",
+							"type": "text"
+						},
+						{
+							"key": "assertion",
+							"value": "{{SAMLToken}}",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{OAuth-User-Id}}",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "ZEPM_REF_APPS_PROD_MAN_SRV_0001",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://{{sap-host-name}}:{{sap-port}}/sap/bc/sec/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"{{sap-host-name}}"
+					],
+					"port": "{{sap-port}}",
+					"path": [
+						"sap",
+						"bc",
+						"sec",
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Products SSL",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{BearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{sap-host-name}}:{{sap-port}}/sap/opu/odata/sap/epm_ref_apps_prod_man_srv/Products?$top=1",
+					"protocol": "https",
+					"host": [
+						"{{sap-host-name}}"
+					],
+					"port": "{{sap-port}}",
+					"path": [
+						"sap",
+						"opu",
+						"odata",
+						"sap",
+						"epm_ref_apps_prod_man_srv",
+						"Products"
+					],
+					"query": [
+						{
+							"key": "$top",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "XSUAABearerToken",
+			"value": null
+		},
+		{
+			"key": "SAMLToken",
+			"value": ""
+		},
+		{
+			"key": "DestinationClientSecret",
+			"value": ""
+		},
+		{
+			"key": "DestinationClientId",
+			"value": ""
+		},
+		{
+			"key": "sap-host-name",
+			"value": "10.xx.xx.xxx"
+		},
+		{
+			"key": "sap-port",
+			"value": "443xx"
+		},
+		{
+			"key": "cf-user-name",
+			"value": "me@contoso.com"
+		},
+		{
+			"key": "cf-user-pwd",
+			"value": ""
+		},
+		{
+			"key": "subaccount-domain",
+			"value": "your cf domain"
+		},
+		{
+			"key": "OAuth-User-Id",
+			"value": ""
+		},
+		{
+			"key": "OAuth-User-Pwd",
+			"value": ""
+		},
+		{
+			"key": "BearerToken",
+			"value": ""
+		}
+	]
+}
