@@ -114,6 +114,20 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- standard RFC lib -->
+        <!--<dependency>
+            <groupId>com.sap.cloud</groupId>
+            <artifactId>neo-java-web-api</artifactId>
+            <version>[3.71.8,4.0.0)</version>
+            <scope>provided</scope>
+        </dependency>-->
+        <!-- import specific mysql lib, due to issues with latest SQL client 8.0.27 for MySQL (prepackaged on BTP) -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.19</version>
+        </dependency>
     </dependencies>
 
     <build>
