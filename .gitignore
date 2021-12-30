@@ -13,3 +13,5 @@
 **/.DS_Store
 .pipeline/commonPipelineEnvironment
 default-env.json
+application/src/main/java/com/sap/cap/productsservice/OAuthSAMLServlet.java
+application/src/main/java/com/sap/cap/productsservice/BTPAzureProxyServletRFCECC.java
