@@ -142,7 +142,7 @@ Name | AzureMySQLBasic |
 Type | HTTP |
 URL | https://[your db domain].[mysql or mariadb].database.azure.com:3306 |
 Proxy Type | Internet |
-User | <sql user>@<your db domain> |
+User | sql_user@your_db_domain |
 Password | Your SQL User Password|
 
 ### Additional Properties
