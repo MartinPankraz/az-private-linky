@@ -3,7 +3,7 @@ Java Project to get you started with [SAP BTP Private Link Service for Azure](ht
 
 This app was built from SAP's Cloud SDK [getting-started Java project](https://developers.sap.com/tutorials/s4sdk-cloud-foundry-sample-application.html#e733958f-50fc-45e3-8f30-d7a53f2c9ad0).
 
-Find my blog post series on the topic [here](https://blogs.sap.com/2021/07/02/whatever-happens-in-an-azure-and-btp-private-linky-swear-stays-in-the-linky-swear/).
+Find my blog post series on the topic [here](https://blogs.sap.com/2021/12/29/getting-started-with-btp-private-link-service-for-azure/).
 
 Additional Resources |
 --- |
@@ -113,7 +113,7 @@ I can warmly recommend transaction __sec_diag_tool__ to troubleshoot any Princip
 #### Testing the SAMLAssertion flow
 To get started I recommend to test your authentication flow without BTP private link to rule out any hickups. I provided a [Postman collection](/Templates/BTP_Private_Link_Service_Testing.postman_collection.json) for that. It is meant to be executed from top to bottom.
 
-### 4. RFC Destination configuration
+### 4. WebSocket RFC Destination configuration
 key | value |
 --- | --- |
 Name | s4BasicAuth |
@@ -131,7 +131,7 @@ jco.client.wshost | btp_private_link_hostname that points to your SAP WDisp (til
 jco.client.wsport | your SAP WDisp port |
 jco.destination.pool_capacity | default 1 |
 
-Note for initial testing of the RFC connection with JCo the property __jco.client.tls_trust_all__ might be helpful. Find more details on JCo properties [here](https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/ab6eac92978f469e9eabe3d477ca2411.html) and from the NEO docs [here](https://help.sap.com/viewer/b865ed651e414196b39f8922db2122c7/Cloud/en-US/8278bed44893498f95d5d6d5f0a47f35.html).
+Note WebSocket RFC is available as of S4 1909. Also for initial testing of the RFC connection with JCo, the property __jco.client.tls_trust_all__ might be helpful. Find more details on JCo properties [here](https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/ab6eac92978f469e9eabe3d477ca2411.html) and from the NEO docs [here](https://help.sap.com/viewer/b865ed651e414196b39f8922db2122c7/Cloud/en-US/8278bed44893498f95d5d6d5f0a47f35.html).
 
 ## Get into contact
 Reach out via the [GitHub Issues page](https://github.com/MartinPankraz/az-private-linky/issues) of this reposto talk about it some more :-)
