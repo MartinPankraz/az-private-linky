@@ -52,7 +52,7 @@ key | value |
 --- | --- |
 Name | s4BasicAuth |
 Type | HTTP |
-URL | https://[your private IP]/ |
+URL | https://[your private hostname]/ |
 Proxy Type | Internet |
 Authentication | Whatever you have here. We tested Basic Auth initially. (Adjust user id and pwd for SAP Principal Propagation!) |
 
@@ -70,7 +70,7 @@ key | value |
 --- | --- |
 Name | s4oauth |
 Type | HTTP |
-URL | https://[your private IP]/sap/bc/sec/oauth2/token?sap-client=[your client no] |
+URL | https://[your private hostname]/sap/bc/sec/oauth2/token?sap-client=[your client no] |
 Proxy Type | Internet |
 Authentication | SAMLAssertion |
 Audience | check Provider Name on __SAML2 backend transaction__ |
@@ -85,7 +85,7 @@ HTML5.DynamicDestination | true |
 WebIDEEnabled | true |
 WebIDEUsage | odata_abap |
 nameIdFormat | urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress |
-tokenServiceURL (type manually and put cursor at beginning to replace capital "T") | https://[your private IP]/sap/bc/sec/oauth2/token?sap-client=[your client no] |
+tokenServiceURL (type manually and put cursor at beginning to replace capital "T") | https://[your private hostname]/sap/bc/sec/oauth2/token?sap-client=[your client no] |
 
 Be aware that currently the property tokenServiceURL will be hidden after save. Also adding trust store will override your tokenServiceURL setting. So, make sure to maintain it again when you make changes to the additional properties. You can just type it again. It will override if still existing.
 
@@ -129,7 +129,7 @@ key | value |
 --- | --- |
 jco.client.client | your SAP client no |
 jco.client.lang | potentially define the language for the output or pass down from your CF app |
-jco.client.wshost | btp_private_link_hostname that points to your SAP WDisp (till available your-pls-private-ip.nip.io) |
+jco.client.wshost | btp_private_link_hostname that points to your SAP WDisp |
 jco.client.wsport | your SAP WDisp port |
 jco.destination.pool_capacity | default 1 |
 
