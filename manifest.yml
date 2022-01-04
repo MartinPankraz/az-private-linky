@@ -18,6 +18,7 @@ applications:
    - az-destinations
    - az-private-link
    - my-xsuaa
+#  - mysql-pe   
 #  - my-application-logs
 #  - my-destination
 #  - my-connectivity
