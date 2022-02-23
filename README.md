@@ -33,7 +33,7 @@ In general for end-to-end SSL you need to consider three options:
 2) Override the verifier within your code (see [BTPAzureProxyServletIgnoreSSL](/application/src/main/java/com/sap/cap/productsservice/BTPAzureProxyServletIgnoreSSL.java))
 3) Maintain the trust store of your destination and configure Server Name Indicator (SNI) with your SAP Personal Security Environment (PSE) on your backend (either through STRUST on NetWeaver or SAP Web Dispatcher). Find details on this setup on [part 7](https://blogs.sap.com/2021/12/01/btp-private-linky-swear-with-azure-how-to-setup-ssl-end-to-end-with-private-link-service/) of the blog series.
 
-Be aware that we need to specify Proxy Type Internet even though the traffic flows throught the private tunnel exposed by PLS. SAP introduced a Destination UI update (Proxy Type Private Link) but the SAP Cloud SDK doesn't support it yet.
+> In case your [version](https://sap.github.io/cloud-sdk/docs/java/release-notes-sap-cloud-sdk-for-java#3610---january-13-2022) of the CloudSDK doesn't support the new Proxy Type *PrivateLink*, revert to *Internet*. Be aware that this is a configuration topic only. By no means does traffic flow to the Internet. It will be resolved to the private tunnel exposed by PLS.
 
 The last destination describes the setup for SQL connection to the newly added PLS feature scope for Azure PaaS. MariaDB and MySQL have been added first.
 
@@ -53,7 +53,7 @@ key | value |
 Name | s4BasicAuth |
 Type | HTTP |
 URL | https://[your private hostname]/ |
-Proxy Type | Internet |
+Proxy Type | PrivateLink |
 Authentication | Whatever you have here. We tested Basic Auth initially. (Adjust user id and pwd for SAP Principal Propagation!) |
 
 ### Additional Properties
@@ -71,7 +71,7 @@ key | value |
 Name | s4oauth |
 Type | HTTP |
 URL | https://[your private hostname]/sap/bc/sec/oauth2/token?sap-client=[your client no] |
-Proxy Type | Internet |
+Proxy Type | PrivateLink |
 Authentication | SAMLAssertion |
 Audience | check Provider Name on __SAML2 backend transaction__ |
 AuthnContextClassRef | urn:oasis:names:tc:SAML:2.0:ac:classes:x509 |
@@ -96,7 +96,7 @@ key | value |
 Name | s4NoAuth |
 Type | HTTP |
 URL | identical to first destination |
-Proxy Type | Internet |
+Proxy Type | PrivateLink |
 Authentication | No Authentication |
 
 ### Additional Properties
@@ -120,7 +120,7 @@ key | value |
 --- | --- |
 Name | s4BasicAuth |
 Type | RFC |
-Proxy Type | Internet |
+Proxy Type | PrivateLink |
 User | Your SAP RFC User |
 Password | Your SAP RFC User Password|
 
@@ -141,7 +141,7 @@ key | value |
 Name | AzureMySQLBasic |
 Type | HTTP |
 URL | https://[your db domain].[mysql or mariadb].database.azure.com:3306 |
-Proxy Type | Internet |
+Proxy Type | PrivateLink |
 User | sql_user@your_db_domain |
 Password | Your SQL User Password|
 
