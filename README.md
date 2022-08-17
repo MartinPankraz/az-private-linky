@@ -1,4 +1,4 @@
-# az-private-linky
+# az-private-linky🔑
 Java Project to get you started with [SAP BTP Private Link Service for Azure](https://help.sap.com/viewer/product/PRIVATE_LINK/CLOUD/en-US) with [SAP Cloud SDK](https://sap.github.io/cloud-sdk/).
 
 This app was built from SAP's Cloud SDK [getting-started Java project](https://developers.sap.com/tutorials/s4sdk-cloud-foundry-sample-application.html#e733958f-50fc-45e3-8f30-d7a53f2c9ad0).
@@ -16,14 +16,22 @@ Additional Resources |
 
 We used the `/sap/opu/odata/sap/epm_ref_apps_prod_man_srv` OData service for this project.
 
-## Project context
+**mvn command cheat sheet🧙🏿‍♂️**
+
+```cmd
+mvn clean package
+cf push
+mvn package tomee:run
+```
+
+## Project Context❔
 [Azure Private Link Service](https://docs.microsoft.com/en-us/azure/private-link/private-link-service-overview) allows private connectivity between resources running on Azure in different environments. That includes SAP's Business Technology Platform when provisioned on Azure. SAP made that functionality available via a CloudFoundry Service.
 
 Meaning you get now a managed component to expose your SAP backends to BTP on Azure without the need for a Cloud Connector. We developed against S4 primarily but anything executable in a service behind the Azure load balancer would be reachable. That involves for instance ECC, BO, PI/PO, SolMan etc.
 
 ![Architecture overview](/application/src/main/webapp/priv-lnk-overview.png)
 
-## BTP Destination config for all scenarios in the blog series
+## BTP Destination config for all scenarios in the blog series⚙️
 We describe a set of Destinations, whereas the first one refers to the initial simple setup discussed in part 1 of the blog series. The next two are required to realize the SAMLAssertion flow. This additional complexity is due to the fact that the SAML2BearerAssertion flow cannot be used, because the BTP Private Link Service operates isolated from all other BTP services by design. As part of the flow the connectivity service would need to reach the OAuth2 server on the SAP backend but can't because it has no visibility of the private endpoint.
 
 We could get away with 2 destinations, because the target configuration is the same except the authorization header. For a cleaner approach and better separation I decided to have a separate instance to avoid overriding authentication.
@@ -152,5 +160,5 @@ HTML5.DynamicDestination | true |
 
 Note: I am not actually using the http destination, but for the lack of another type I chose this one. It serves only as config store for the jdbc connection on the backend. The http part is ignored.
 
-## Get into contact
+## Get into contact☎️
 Reach out via the [GitHub Issues page](https://github.com/MartinPankraz/az-private-linky/issues) of this reposto talk about it some more :-)
