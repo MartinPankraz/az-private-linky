@@ -31,7 +31,7 @@ import java.time.Instant;
 
 @WebServlet("/k8s/*")
 /* uncomment once you start using the approuter */
-@ServletSecurity(@HttpConstraint(rolesAllowed = { "Display" }))
+//@ServletSecurity(@HttpConstraint(rolesAllowed = { "Display" }))
 public class BTPAzureProxyServletAKS extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
