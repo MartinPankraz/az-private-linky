@@ -59,10 +59,11 @@ public class BTPAzureProxyServletSQL extends HttpServlet
             while (rs.next()) {
                 int id = rs.getInt("ID");
                 String title = rs.getString("title");
+                String author = rs.getString("author");
                 String stock = rs.getString("stock");
 
                 // do something with the extracted data...
-                list.add(id + " "+ title +"("+stock+")");
+                list.add(id + " "+ title + " by " + author +" ("+stock+")");
             }
         } catch (SQLException | ClassNotFoundException e) {
             response.getWriter().write(e.getMessage());
