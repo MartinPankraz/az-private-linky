@@ -32,7 +32,7 @@ Meaning you get now a managed component to expose your SAP backends to BTP on Az
 ![Architecture overview](/application/src/main/webapp/priv-lnk-overview.png)
 
 ## BTP Destination config for all scenarios in the blog series⚙️
-We describe a set of Destinations, whereas the first one refers to the initial simple setup discussed in part 1 of the blog series. The next two are required to realize the SAMLAssertion flow. This additional complexity is due to the fact that the SAML2BearerAssertion flow cannot be used, because the BTP Private Link Service operates isolated from all other BTP services by design. As part of the flow the connectivity service would need to reach the OAuth2 server on the SAP backend but can't because it has no visibility of the private endpoint.
+We describe a set of Destinations, whereas the first one refers to the initial simple setup discussed in part 1 of the blog series. The next two are required to realize the SAMLAssertion flow. This additional complexity is due to the fact that the SAML2BearerAssertion flow cannot be used, because the SAP Private Link Service operates isolated from all other BTP services by design. As part of the flow the connectivity service would need to reach the OAuth2 server on the SAP backend but can't because it has no visibility of the private endpoint.
 
 We could get away with 2 destinations, because the target configuration is the same except the authorization header. For a cleaner approach and better separation I decided to have a separate instance to avoid overriding authentication.
 
@@ -121,7 +121,7 @@ If you configure SAP Principal Propagation based upon above config, please note 
 I can warmly recommend transaction __sec_diag_tool__ to troubleshoot any Principal Propagation related issues.
 
 #### Testing the SAMLAssertion flow
-To get started I recommend to test your authentication flow without BTP private link to rule out any hickups. I provided a [Postman collection](/Templates/BTP_Private_Link_Service_Testing.postman_collection.json) for that. It is meant to be executed from top to bottom.
+To get started I recommend to test your authentication flow without SAP Private Link to rule out any hickups. I provided a [Postman collection](/Templates/BTP_Private_Link_Service_Testing.postman_collection.json) for that. It is meant to be executed from top to bottom.
 
 ### 4. WebSocket RFC Destination configuration
 key | value |
