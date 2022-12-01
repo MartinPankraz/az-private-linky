@@ -5,6 +5,8 @@ This app was built from SAP's Cloud SDK [getting-started Java project](https://d
 
 Find my **blog post series** on the topic [here](https://blogs.sap.com/2021/12/29/getting-started-with-btp-private-link-service-for-azure/).
 
+The [templates](Templates/) folder contains Postman collections and blue prints for integrations mentioned on the [blog series]().
+
 Additional Resources |
 --- |
 [CAP example Project](https://github.com/MartinPankraz/az-private-linky-cap) |
