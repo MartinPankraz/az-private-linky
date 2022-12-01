@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "df80327f-5c5a-48ee-a08a-070bb4d8af02",
-		"name": "BTP_Private_Link_Service_Testing",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "5830bd25-b26f-4fd0-a9e1-d97540497498",
+		"name": "SAP_Private_Link_Service_for_Azure",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8114323"
 	},
 	"item": [
 		{
@@ -63,12 +64,12 @@
 					]
 				},
 				"url": {
-					"raw": "https://{{subaccount-domain}}.authentication.eu20.hana.ondemand.com/oauth/token",
+					"raw": "https://{{subaccount-domain}}.authentication.{{azure-region}}.hana.ondemand.com/oauth/token",
 					"protocol": "https",
 					"host": [
 						"{{subaccount-domain}}",
 						"authentication",
-						"eu20",
+						"{{azure-region}}",
 						"hana",
 						"ondemand",
 						"com"
@@ -115,12 +116,12 @@
 					}
 				],
 				"url": {
-					"raw": "https://destination-configuration.cfapps.eu20.hana.ondemand.com/destination-configuration/v1/destinations/s4oauth",
+					"raw": "https://destination-configuration.cfapps.{{azure-region}}.hana.ondemand.com/destination-configuration/v1/destinations/s4oauth",
 					"protocol": "https",
 					"host": [
 						"destination-configuration",
 						"cfapps",
-						"eu20",
+						"{{azure-region}}",
 						"hana",
 						"ondemand",
 						"com"
@@ -256,6 +257,211 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Bearer for Destination Service with Service Key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var json = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"XSUAABearerToken\", json.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{DestinationClientSecret}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{DestinationClientId}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://{{subaccount-domain}}.authentication.{{azure-region}}.hana.ondemand.com/oauth/token?grant_type=client_credentials",
+					"protocol": "https",
+					"host": [
+						"{{subaccount-domain}}",
+						"authentication",
+						"{{azure-region}}",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get trust store config from Destination (cert renewal scenario)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{XSUAABearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://destination-configuration.cfapps.{{azure-region}}.hana.ondemand.com/destination-configuration/v1/instanceDestinations/s4BasicAuth",
+					"protocol": "https",
+					"host": [
+						"destination-configuration",
+						"cfapps",
+						"{{azure-region}}",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"destination-configuration",
+						"v1",
+						"instanceDestinations",
+						"s4BasicAuth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get cert from trust store config from Destination (cert renewal scenario)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{XSUAABearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://destination-configuration.cfapps.{{azure-region}}.hana.ondemand.com/destination-configuration/v1/instanceCertificates",
+					"protocol": "https",
+					"host": [
+						"destination-configuration",
+						"cfapps",
+						"{{azure-region}}",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"destination-configuration",
+						"v1",
+						"instanceCertificates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Renew cert in BTP destination trust store by name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{XSUAABearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Content\": \"\",\r\n  \"Name\": \"sap-pls-appgw-cert.cer\",\r\n  \"Type\": \"CERTIFICATE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://destination-configuration.cfapps.{{azure-region}}.hana.ondemand.com/destination-configuration/v1/instanceCertificates",
+					"protocol": "https",
+					"host": [
+						"destination-configuration",
+						"cfapps",
+						"{{azure-region}}",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"destination-configuration",
+						"v1",
+						"instanceCertificates"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -313,7 +519,12 @@
 		},
 		{
 			"key": "subaccount-domain",
-			"value": "your cf domain"
+			"value": "azure-private"
+		},
+		{
+			"key": "azure-region",
+			"value": "eu20",
+			"type": "string"
 		},
 		{
 			"key": "OAuth-User-Id",
