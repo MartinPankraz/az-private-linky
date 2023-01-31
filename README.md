@@ -15,6 +15,7 @@ Additional Resources |
 [Azure Kubernetes Service example](https://github.com/MartinPankraz/az-private-linky-aks) |
 [SAP's tutorial with CF CLI commands](https://developers.sap.com/tutorials/private-link-microsoft-azure.html) |
 [SAP's Discovery Center Mission](https://github.com/SAP-samples/s4hana-btp-extension-devops/tree/mission/05-PrivateLink) |
+[Database spectrum available for SAP PLS](https://github.com/MartinPankraz/sap-nodejs-on-cosmosdb-app#learn-more-about-available-database-spectrum-for-sap-private-link-scenarios)
 
 We used the `/sap/opu/odata/sap/epm_ref_apps_prod_man_srv` OData service for this project.
 
