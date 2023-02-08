@@ -164,4 +164,4 @@ HTML5.DynamicDestination | true |
 Note: I am not actually using the http destination, but for the lack of another type I chose this one. It serves only as config store for the jdbc connection on the backend. The http part is ignored.
 
 ## Get into contact☎️
-Reach out via the [GitHub Issues page](https://github.com/MartinPankraz/az-private-linky/issues) of this reposto talk about it some more :-)
+Reach out via the [GitHub Issues page](https://github.com/MartinPankraz/az-private-linky/issues) of this repos to talk about it some more :-)
