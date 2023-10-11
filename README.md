@@ -1,4 +1,5 @@
 # az-private-linky🔑
+
 Java Project to get you started with [SAP Private Link Service for Azure](https://help.sap.com/viewer/product/PRIVATE_LINK/CLOUD) with [SAP Cloud SDK](https://sap.github.io/cloud-sdk/).
 
 This app was built from SAP's Cloud SDK [getting-started Java project](https://developers.sap.com/tutorials/s4sdk-cloud-foundry-sample-application.html#e733958f-50fc-45e3-8f30-d7a53f2c9ad0).
@@ -6,6 +7,9 @@ This app was built from SAP's Cloud SDK [getting-started Java project](https://d
 Find my **blog post series** on the topic [here](https://blogs.sap.com/2021/12/29/getting-started-with-btp-private-link-service-for-azure/).
 
 The [templates](Templates/) folder contains Postman collections and blue prints for integrations mentioned on the [blog series]().
+
+> **Warning**
+> The Java runtime and mvn dev environment on SAP BTP has moved on. You will need to upgrade the setup to the latest supported by SAP. It doesn't run anymore as is. I focussed on the CAP nodejs implementation instead now. Please use [that project](https://github.com/MartinPankraz/az-private-linky-cap) going forward for a turn key solution. In case you upgrade the Java sample would appreciate a PR :-)
 
 Additional Resources |
 --- |
